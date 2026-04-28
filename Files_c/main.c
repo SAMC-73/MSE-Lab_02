@@ -20,9 +20,11 @@
 #include <stdint.h>
 #include "timer.h"
 #include "pwm.h"
+#include "led.h"
 
 int main(void)
 {
+    led_init();
     timer_init();
 
     pwm_init(1000);        /* 1 kHz PWM on PA6 via TIM3_CH1 */
@@ -30,6 +32,8 @@ int main(void)
     pwm_start();           /* enable CCER + start TIM3 counter */
 
     while(1) {
+        led_toggle();
         timer_delay_ms(500);
+        
     }
 }
